@@ -1,10 +1,10 @@
-import { createAsyncThunk, isRejectedWithValue } from "@reduxjs/toolkit"
-import axios from "axios"
+import { createAsyncThunk, isRejectedWithValue } from '@reduxjs/toolkit'
+import axios from 'axios'
 
-const POST_URL = "http://localhost:8000"
+const POST_URL = 'http://localhost:8000'
 
 // create User
-export const createTask = createAsyncThunk("createTask", async (formData) => {
+export const createTask = createAsyncThunk('createTask', async (formData) => {
   try {
     const response = await axios.post(`${POST_URL}/posts`, formData)
     console.log(response.data)
@@ -14,7 +14,7 @@ export const createTask = createAsyncThunk("createTask", async (formData) => {
   }
 })
 
-export const getAllTask = createAsyncThunk("getAllTask", async (_) => {
+export const getAllTask = createAsyncThunk('getAllTask', async (_) => {
   try {
     const response = await axios.get(`${POST_URL}/posts`)
     console.log(response.data)
@@ -24,9 +24,9 @@ export const getAllTask = createAsyncThunk("getAllTask", async (_) => {
   }
 })
 
-export const getTask = createAsyncThunk("getTask", async (id) => {
+export const getTask = createAsyncThunk('getTask', async (id) => {
   try {
-    const response = await axios.get(`${POST_URL}/posts/get/${id}`)
+    const response = await axios.get(`${POST_URL}/posts/${id}`)
     console.log(response.data)
     return response.data
   } catch (error) {
@@ -35,14 +35,11 @@ export const getTask = createAsyncThunk("getTask", async (id) => {
 })
 
 export const updateTask = createAsyncThunk(
-  "updateTask",
+  'updateTask',
   async (id, updateData) => {
     console.log(updateData)
     try {
-      const response = await axios.put(
-        `${POST_URL}/posts/update/${id}`,
-        updateData
-      )
+      const response = await axios.put(`${POST_URL}/posts/${id}`, updateData)
 
       console.log(response.data)
       return response.data
@@ -52,9 +49,9 @@ export const updateTask = createAsyncThunk(
   }
 )
 
-export const deleteTask = createAsyncThunk("deleteTask", async (id) => {
+export const deleteTask = createAsyncThunk('deleteTask', async (id) => {
   try {
-    const response = await axios.delete(`${POST_URL}/posts/delete/${id}`)
+    const response = await axios.delete(`${POST_URL}/posts/${id}`)
     console.log(response.data)
     return response.data
   } catch (error) {
