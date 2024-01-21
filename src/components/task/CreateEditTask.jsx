@@ -48,6 +48,7 @@ export default function CreateEditTask({ id, open, setOpen }) {
       endTime: new Date(),
     })
     setAvatar(null)
+    handleClickClose()
   }
   console.log(formData)
 
@@ -137,7 +138,6 @@ export default function CreateEditTask({ id, open, setOpen }) {
               <button
                 className="py-2 px-5 bg-blue-600 text-slate-50 rounded-lg hover:bg-blue-500 cursor-pointer"
                 type="submit"
-                onClick={handleClickClose}
               >
                 Ekle
               </button>

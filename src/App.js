@@ -1,17 +1,18 @@
-import { Outlet, createBrowserRouter, RouterProvider } from "react-router-dom"
+import { Outlet, createBrowserRouter, RouterProvider } from 'react-router-dom'
 
-import Projeler from "./pages/Projeler"
-import Sidebar from "./components/sidebar/Sidebar"
-import Navbar from "./components/navbar/Navbar"
-import Dashboard from "./pages/Home"
-import SingleTask from "./pages/SingleTask"
+import Projeler from './pages/Projeler'
+import Sidebar from './components/sidebar/Sidebar'
+import Navbar from './components/navbar/Navbar'
+import Dashboard from './pages/Home'
+import SingleTask from './pages/SingleTask'
+import Takvim from './pages/Takvim'
 
 function App() {
   const Layout = () => {
     return (
-      <div className='flex'>
+      <div className="flex">
         <Sidebar />
-        <div className='flex-1 bg-[#F2EDF3]'>
+        <div className="flex-1 bg-[#F2EDF3]">
           <Navbar />
           <div>
             <Outlet />
@@ -22,22 +23,26 @@ function App() {
   }
   const router = createBrowserRouter([
     {
-      path: "/",
+      path: '/',
       element: <Layout />,
       children: [
         {
-          path: "/dashboard",
+          path: '/dashboard',
           element: <Dashboard />,
         },
         {
-          path: "/projeler",
+          path: '/projeler',
           element: <Projeler />,
           children: [
             {
-              path: "/projeler/:id",
+              path: '/projeler/:id',
               element: <SingleTask />,
             },
           ],
+        },
+        {
+          path: '/takvim',
+          element: <Takvim />,
         },
       ],
     },
