@@ -13,7 +13,7 @@ export default function Projeler() {
   return (
     <div>
       <List />
-      <div className='flex items-center flex-wrap p-2 md:justify-center'>
+      <div className='flex items-center flex-wrap p-2'>
         {tasks &&
           tasks
             .map((item) => <CardTask key={item.id} task={item} {...item} />)

@@ -61,7 +61,7 @@ export default function CardTask({
         maxWidth: 400,
         borderRadius: "20px",
         margin: "15px",
-        "@media (min-width: 600px)": {
+        "@media (min-width: 800px)": {
           maxWidth: 380,
         },
       }}
