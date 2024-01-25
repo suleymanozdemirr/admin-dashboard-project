@@ -11,7 +11,7 @@ import MenuList from "@mui/material/MenuList"
 import { useState } from "react"
 import ProgressBar from "./ProgressBar"
 import { useDispatch } from "react-redux"
-import CreateEditTask from "./CreateEditTask"
+import CreateTask from "./CreateTask"
 import { deleteTask } from "../../redux/features/task/taskAction"
 
 export default function CardTask({
@@ -66,7 +66,7 @@ export default function CardTask({
         },
       }}
     >
-      {open ? <CreateEditTask task={task} open={open} setOpen={setOpen} /> : ""}
+      {open ? <CreateTask task={task} open={open} setOpen={setOpen} /> : ""}
 
       <div className='flex items-center p-7 space-x-3'>
         <div className='border-dashed border-2 p-1 rounded-xl'>
@@ -74,7 +74,7 @@ export default function CardTask({
         </div>
         <div className='w-2/3'>
           <h5 className='text-base font-semibold'>{projectName}</h5>
-          <span className='text-sm font-normal'>
+          <span className='text-sm font-normal '>
             Saha Sorumlusu: {fieldManager}
           </span>
         </div>
