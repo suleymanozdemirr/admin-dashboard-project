@@ -11,15 +11,14 @@ import MenuList from "@mui/material/MenuList"
 import { useState } from "react"
 import ProgressBar from "./ProgressBar"
 import { useDispatch } from "react-redux"
-import CreateTask from "./CreateTask"
 import { deleteTask } from "../../redux/features/task/taskAction"
+import AddEditTask from "./AddEditTask"
 
 export default function CardTask({
   projectName,
   description,
   fieldManager,
   avatar,
-  id,
   task,
 }) {
   const dispatch = useDispatch()
@@ -49,7 +48,6 @@ export default function CardTask({
       return `${differenceInWeeks} hafta kaldı`
     }
   }
-  console.log(task)
 
   const handleDelete = () => {
     dispatch(deleteTask(task.id))
@@ -62,11 +60,11 @@ export default function CardTask({
         borderRadius: "20px",
         margin: "15px",
         "@media (min-width: 800px)": {
-          maxWidth: 380,
+          maxWidth: 390,
         },
       }}
     >
-      {open ? <CreateTask task={task} open={open} setOpen={setOpen} /> : ""}
+      {open ? <AddEditTask task={task} open={open} setOpen={setOpen} /> : ""}
 
       <div className='flex items-center p-7 space-x-3'>
         <div className='border-dashed border-2 p-1 rounded-xl'>

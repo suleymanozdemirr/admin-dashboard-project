@@ -1,12 +1,12 @@
 import { createAsyncThunk, isRejectedWithValue } from "@reduxjs/toolkit"
 import axios from "axios"
 
-const POST_URL = "http://localhost:8000"
+const POST_URL = "http://localhost:8000/posts"
 
 // create User
 export const createTask = createAsyncThunk("createTask", async (formData) => {
   try {
-    const response = await axios.post(`${POST_URL}/posts`, formData)
+    const response = await axios.post(`${POST_URL}`, formData)
     console.log(response.data)
     return response.data
   } catch (error) {
@@ -16,7 +16,7 @@ export const createTask = createAsyncThunk("createTask", async (formData) => {
 
 export const getAllTask = createAsyncThunk("getAllTask", async () => {
   try {
-    const response = await axios.get(`${POST_URL}/posts`)
+    const response = await axios.get(`${POST_URL}`)
     console.log(response.data)
     return response.data
   } catch (error) {
@@ -26,7 +26,7 @@ export const getAllTask = createAsyncThunk("getAllTask", async () => {
 
 export const getTask = createAsyncThunk("getTask", async (id) => {
   try {
-    const response = await axios.get(`${POST_URL}/posts/${id}`)
+    const response = await axios.get(`${POST_URL}/${id}`)
     console.log(response.data)
     return response.data
   } catch (error) {
@@ -36,9 +36,13 @@ export const getTask = createAsyncThunk("getTask", async (id) => {
 
 export const updateTask = createAsyncThunk(
   "updateTask",
-  async (id, updateData) => {
+  async (id, updatedData) => {
+    console.log(updatedData)
     try {
-      const response = await axios.patch(`${POST_URL}/posts/${id}`, updateData)
+      const response = await axios.put(
+        `${POST_URL}/${updatedData.id}`,
+        updatedData
+      )
       console.log(response.data)
       return response.data
     } catch (error) {
@@ -49,7 +53,7 @@ export const updateTask = createAsyncThunk(
 
 export const deleteTask = createAsyncThunk("deleteTask", async (id) => {
   try {
-    const response = await axios.delete(`${POST_URL}/posts/${id}`)
+    const response = await axios.delete(`${POST_URL}/${id}`)
     console.log(response.data)
     return response.data
   } catch (error) {

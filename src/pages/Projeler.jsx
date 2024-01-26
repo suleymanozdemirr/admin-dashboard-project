@@ -5,7 +5,7 @@ import { useEffect } from "react"
 import { getAllTask } from "../redux/features/task/taskAction"
 
 export default function Projeler() {
-  const tasks = useSelector((state) => state.task.tasks)
+  const tasks = useSelector((state) => state.task.tasks) || []
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getAllTask())
@@ -14,7 +14,10 @@ export default function Projeler() {
     <div>
       <List />
       <div className='flex items-center flex-wrap p-2'>
-        {tasks &&
+        {Array.isArray(tasks) && tasks.length === 0 && (
+          <h1>Henüz bir proje yok</h1>
+        )}
+        {Array.isArray(tasks) &&
           tasks
             .map((item) => <CardTask key={item.id} task={item} {...item} />)
             .reverse()}

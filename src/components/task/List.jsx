@@ -2,7 +2,7 @@ import Tabs from "@mui/material/Tabs"
 import Tab from "@mui/material/Tab"
 import Box from "@mui/material/Box"
 import { useState } from "react"
-import CreateTask from "./CreateTask"
+import AddEditTask from "./AddEditTask"
 
 export default function List() {
   const [value, setValue] = useState(0)
@@ -30,7 +30,7 @@ export default function List() {
           <Tab label='Tamamlanmış' />
         </Tabs>
       </Box>
-      {open ? <CreateTask open={open} setOpen={setOpen} /> : ""}
+      {open ? <AddEditTask open={open} setOpen={setOpen} /> : ""}
       <button
         className='px-6 py-2 bg-blue-600 text-slate-50 rounded-lg hover:bg-blue-500 cursor-pointer'
         type='button'

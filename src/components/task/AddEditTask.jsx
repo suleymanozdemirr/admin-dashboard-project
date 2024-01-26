@@ -5,7 +5,7 @@ import DialogTitle from "@mui/material/DialogTitle"
 import { useEffect, useState } from "react"
 import Profil from "./Profil"
 import { createTask, updateTask } from "../../redux/features/task/taskAction"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
 function convertToBase64(file) {
   return new Promise((resolve, reject) => {
@@ -20,7 +20,7 @@ function convertToBase64(file) {
   })
 }
 
-export default function CreateTask({ id, open, setOpen, task }) {
+export default function AddEditTask({ id, open, setOpen, task }) {
   const [avatar, setAvatar] = useState("")
   const dispatch = useDispatch()
   const [formData, setFormData] = useState({
@@ -31,17 +31,13 @@ export default function CreateTask({ id, open, setOpen, task }) {
     starTime: new Date(),
     endTime: new Date(),
   })
+  const tasks = useSelector((state) =>
+    id ? state.task.tasks.find((item) => item.id === id) : null
+  )
 
   useEffect(() => {
     if (task) {
-      setFormData({
-        projectName: task.projectName || "",
-        avatar: task.avatar || "",
-        description: task.description || "",
-        fieldManager: task.fieldManager || "",
-        starTime: task.starTime || new Date(),
-        endTime: task.endTime || new Date(),
-      })
+      setFormData(task)
       setAvatar(task.avatar && URL.createObjectURL(new Blob([task.avatar])))
     }
   }, [task])
@@ -50,12 +46,12 @@ export default function CreateTask({ id, open, setOpen, task }) {
     setOpen(false)
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    if (task) {
-      dispatch(updateTask({ id: task.id, updateData: formData }))
+    if (id) {
+      await dispatch(updateTask({ id: tasks.id, updatedData: formData }))
     } else {
-      dispatch(createTask(formData))
+      await dispatch(createTask(formData))
     }
     setFormData({
       projectName: "",
@@ -66,17 +62,11 @@ export default function CreateTask({ id, open, setOpen, task }) {
       endTime: new Date(),
     })
     setAvatar(null)
-    handleClickClose()
   }
-  console.log(formData)
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
-    setFormData({
-      ...formData,
-      [name]: value,
-      avatar: avatar,
-    })
+    setFormData({ ...formData, [name]: value })
   }
 
   const handleFileUpload = async (e) => {
@@ -86,7 +76,6 @@ export default function CreateTask({ id, open, setOpen, task }) {
       ...formData,
       avatar: base64,
     })
-    console.log(file)
     setAvatar(file && URL.createObjectURL(file))
   }
 
@@ -94,7 +83,7 @@ export default function CreateTask({ id, open, setOpen, task }) {
     <Paper>
       <Dialog open={open} onClose={handleClickClose}>
         <DialogTitle sx={{ fontWeight: "500", fontSize: "20px" }}>
-          Yeni Proje Ekle
+          {task ? "" : "Yeni Proje Ekle"}
         </DialogTitle>
         <DialogContent>
           <form method='post' onSubmit={handleSubmit}>
@@ -110,14 +99,14 @@ export default function CreateTask({ id, open, setOpen, task }) {
 
               <TextField
                 name='projectName'
-                value={id || formData.projectName}
+                value={formData.projectName || ""}
                 onChange={handleInputChange}
                 variant='outlined'
                 label='Project Name'
               />
               <TextField
                 name='fieldManager'
-                value={formData.fieldManager}
+                value={formData.fieldManager || ""}
                 onChange={handleInputChange}
                 variant='outlined'
                 label='Saha Sorumlusu'
@@ -126,7 +115,7 @@ export default function CreateTask({ id, open, setOpen, task }) {
                 maxRows={2}
                 minRows={2}
                 name='description'
-                value={formData.description}
+                value={formData.description || ""}
                 onChange={handleInputChange}
                 variant='outlined'
                 label='Project Details'
@@ -135,7 +124,7 @@ export default function CreateTask({ id, open, setOpen, task }) {
                 <TextField
                   name='starTime'
                   label='Start Date'
-                  value={formData.starTime}
+                  value={formData.starTime || ""}
                   onChange={handleInputChange}
                   type='datetime-local'
                   InputProps={{ style: { borderRadius: "10px" } }}
@@ -145,7 +134,7 @@ export default function CreateTask({ id, open, setOpen, task }) {
                 <TextField
                   name='endTime'
                   label='End Date'
-                  value={formData.endTime}
+                  value={formData.endTime || ""}
                   onChange={handleInputChange}
                   type='datetime-local'
                   InputProps={{ style: { borderRadius: "10px" } }}
@@ -157,7 +146,7 @@ export default function CreateTask({ id, open, setOpen, task }) {
                 className='py-2 px-5 bg-blue-600 text-slate-50 rounded-lg hover:bg-blue-500 cursor-pointer'
                 type='submit'
               >
-                Ekle
+                {task ? "Güncelle" : "Ekle"}
               </button>
             </Stack>
           </form>
