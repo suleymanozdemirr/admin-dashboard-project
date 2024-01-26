@@ -35,7 +35,7 @@ export default function CreateTask({ id, open, setOpen, task }) {
   useEffect(() => {
     if (task) {
       setFormData({
-        projectName: task.projectName,
+        projectName: task.projectName || "",
         avatar: task.avatar || "",
         description: task.description || "",
         fieldManager: task.fieldManager || "",
@@ -110,14 +110,14 @@ export default function CreateTask({ id, open, setOpen, task }) {
 
               <TextField
                 name='projectName'
-                defaultValue={id || formData.projectName}
+                value={id || formData.projectName}
                 onChange={handleInputChange}
                 variant='outlined'
                 label='Project Name'
               />
               <TextField
                 name='fieldManager'
-                defaultValue={formData.fieldManager}
+                value={formData.fieldManager}
                 onChange={handleInputChange}
                 variant='outlined'
                 label='Saha Sorumlusu'
@@ -126,7 +126,7 @@ export default function CreateTask({ id, open, setOpen, task }) {
                 maxRows={2}
                 minRows={2}
                 name='description'
-                defaultValue={formData.description}
+                value={formData.description}
                 onChange={handleInputChange}
                 variant='outlined'
                 label='Project Details'
@@ -135,7 +135,7 @@ export default function CreateTask({ id, open, setOpen, task }) {
                 <TextField
                   name='starTime'
                   label='Start Date'
-                  defaultValue={formData.starTime}
+                  value={formData.starTime}
                   onChange={handleInputChange}
                   type='datetime-local'
                   InputProps={{ style: { borderRadius: "10px" } }}
@@ -145,7 +145,7 @@ export default function CreateTask({ id, open, setOpen, task }) {
                 <TextField
                   name='endTime'
                   label='End Date'
-                  defaultValue={formData.endTime}
+                  value={formData.endTime}
                   onChange={handleInputChange}
                   type='datetime-local'
                   InputProps={{ style: { borderRadius: "10px" } }}
