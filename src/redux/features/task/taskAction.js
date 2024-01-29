@@ -36,7 +36,7 @@ export const getTask = createAsyncThunk("getTask", async (id) => {
 
 export const updateTask = createAsyncThunk(
   "updateTask",
-  async (id, updatedData) => {
+  async (updatedData) => {
     console.log(updatedData)
     try {
       const response = await axios.put(

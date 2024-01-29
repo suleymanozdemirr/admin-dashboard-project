@@ -5,11 +5,13 @@ import { useEffect } from "react"
 import { getAllTask } from "../redux/features/task/taskAction"
 
 export default function Projeler() {
-  const tasks = useSelector((state) => state.task.tasks) || []
+  const { tasks } = useSelector((state) => ({ ...state.task })) || []
   const dispatch = useDispatch()
+
   useEffect(() => {
     dispatch(getAllTask())
   }, [dispatch])
+
   return (
     <div>
       <List />
@@ -19,7 +21,7 @@ export default function Projeler() {
         )}
         {Array.isArray(tasks) &&
           tasks
-            .map((item) => <CardTask key={item.id} task={item} {...item} />)
+            .map((item, i) => <CardTask key={item.id} task={item} {...item} />)
             .reverse()}
       </div>
     </div>

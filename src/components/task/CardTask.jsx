@@ -11,7 +11,7 @@ import MenuList from "@mui/material/MenuList"
 import { useState } from "react"
 import ProgressBar from "./ProgressBar"
 import { useDispatch } from "react-redux"
-import { deleteTask } from "../../redux/features/task/taskAction"
+import { deleteTask, getAllTask } from "../../redux/features/task/taskAction"
 import AddEditTask from "./AddEditTask"
 
 export default function CardTask({
@@ -49,9 +49,13 @@ export default function CardTask({
     }
   }
 
+  const getAllTasks = () => {
+    dispatch(getAllTask())
+  }
+
   const handleDelete = () => {
     dispatch(deleteTask(task.id))
-    window.location.reload()
+    getAllTasks()
   }
   return (
     <Card
