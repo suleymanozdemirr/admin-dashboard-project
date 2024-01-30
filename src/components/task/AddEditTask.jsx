@@ -47,7 +47,7 @@ export default function AddEditTask({ id, open, setOpen, task }) {
     avatar: "",
     description: "",
     fieldManager: "",
-    starTime: new Date(),
+    startTime: new Date(),
     endTime: new Date(),
   })
   const [anchorEl, setAnchorEl] = useState(null)
@@ -58,7 +58,15 @@ export default function AddEditTask({ id, open, setOpen, task }) {
 
   useEffect(() => {
     if (task) {
-      setFormData(task)
+      // Form verilerini güncelle
+      setFormData({
+        projectName: task.projectName || "",
+        avatar: task.avatar || "",
+        description: task.description || "",
+        fieldManager: task.fieldManager || "",
+        startTime: task.startTime || new Date(),
+        endTime: task.endTime || new Date(),
+      })
       setAvatar(task.avatar && URL.createObjectURL(new Blob([task.avatar])))
     }
   }, [task])
@@ -81,7 +89,7 @@ export default function AddEditTask({ id, open, setOpen, task }) {
     e.preventDefault()
     if (id) {
       console.log(`create: ${formData}`)
-      dispatch(updateTask({ id, updatedData: formData }))
+      dispatch(updateTask({ id: tasks.id, updatedData: formData }))
     } else {
       console.log(`update: ${formData} and ${id}`)
       dispatch(createTask(formData))
@@ -91,7 +99,7 @@ export default function AddEditTask({ id, open, setOpen, task }) {
       avatar: avatar,
       description: "",
       fieldManager: "",
-      starTime: new Date(),
+      startTime: new Date(),
       endTime: new Date(),
     })
     setAvatar(null)
@@ -115,12 +123,6 @@ export default function AddEditTask({ id, open, setOpen, task }) {
     })
     setAvatar(file && URL.createObjectURL(file))
   }
-  // const handleUpdate = () => {
-  //   if (id) {
-  //     dispatch(updateTask({ id, updatedData: formData }))
-  //     handleClickClose()
-  //   }
-  // }
 
   return (
     <Paper>
@@ -129,11 +131,11 @@ export default function AddEditTask({ id, open, setOpen, task }) {
           {task ? "" : "Yeni Proje Ekle"}
         </DialogTitle>
         <DialogContent>
-          <form method='post' onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit}>
             <Stack
               sx={{
                 width: "470px",
-                height: "490px",
+                height: "540px",
               }}
               spacing={2}
               direction='column'
@@ -192,7 +194,7 @@ export default function AddEditTask({ id, open, setOpen, task }) {
                 value={formData.projectName || ""}
                 onChange={handleInputChange}
                 variant='outlined'
-                label='Project Name'
+                label='Proje Adı'
               />
               <TextField
                 name='fieldManager'
@@ -202,19 +204,19 @@ export default function AddEditTask({ id, open, setOpen, task }) {
                 label='Saha Sorumlusu'
               />
               <TextField
-                maxRows={2}
-                minRows={2}
+                rows={4}
+                multiline
                 name='description'
                 value={formData.description || ""}
                 onChange={handleInputChange}
                 variant='outlined'
-                label='Project Details'
+                label='Proje Detayı'
               />
               <div className='flex items-center justify-between'>
                 <TextField
-                  name='starTime'
-                  label='Start Date'
-                  value={formData.starTime || ""}
+                  name='startTime'
+                  label='Başlangıç Tarihi'
+                  value={formData.startTime || ""}
                   onChange={handleInputChange}
                   type='datetime-local'
                   InputProps={{ style: { borderRadius: "10px" } }}
@@ -223,7 +225,7 @@ export default function AddEditTask({ id, open, setOpen, task }) {
                 />
                 <TextField
                   name='endTime'
-                  label='End Date'
+                  label='Bitiş Tarihi'
                   value={formData.endTime || ""}
                   onChange={handleInputChange}
                   type='datetime-local'
@@ -232,22 +234,12 @@ export default function AddEditTask({ id, open, setOpen, task }) {
                   InputLabelProps={{ shrink: true }}
                 />
               </div>
-              {task ? (
-                <button
-                  type='button'
-                  onClick={handleSubmit}
-                  className='py-2 px-5 bg-blue-600 text-slate-50 rounded-lg hover:bg-blue-500 cursor-pointer'
-                >
-                  Güncelle
-                </button>
-              ) : (
-                <button
-                  className='py-2 px-5 bg-blue-600 text-slate-50 rounded-lg hover:bg-blue-500 cursor-pointer'
-                  type='submit'
-                >
-                  Ekle
-                </button>
-              )}
+              <button
+                className='py-2 px-5 bg-blue-600 text-slate-50 rounded-lg hover:bg-blue-500 cursor-pointer'
+                type='submit'
+              >
+                {task ? "Güncelle" : "Ekle"}
+              </button>
             </Stack>
           </form>
         </DialogContent>

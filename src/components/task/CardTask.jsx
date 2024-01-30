@@ -11,13 +11,14 @@ import MenuList from "@mui/material/MenuList"
 import { useState } from "react"
 import ProgressBar from "./ProgressBar"
 import { useDispatch } from "react-redux"
-import { deleteTask, getAllTask } from "../../redux/features/task/taskAction"
+import { deleteTask } from "../../redux/features/task/taskAction"
 import AddEditTask from "./AddEditTask"
 
 export default function CardTask({
   projectName,
   description,
   fieldManager,
+  progres,
   avatar,
   task,
 }) {
@@ -35,34 +36,31 @@ export default function CardTask({
   const handleClickOpen = () => {
     setOpen(true)
   }
-  const handleDate = (starTime, endTime) => {
-    console.log(starTime, endTime)
-    const diffMilliseconds = Date.parse(endTime) - Date.parse(starTime)
+  const handleDate = (startTime, endTime) => {
+    console.log(startTime, endTime)
+    const diffMilliseconds = Date.parse(endTime) - Date.parse(startTime)
     const differenceInDays = Math.floor(
       diffMilliseconds / (1000 * 60 * 60 * 24)
     )
     const differenceInWeeks = Math.floor(differenceInDays / 7)
-    if (differenceInDays < 7) {
+    if (differenceInDays <= 0) {
+      return "Bitim Onayı"
+    } else if (differenceInDays < 7) {
       return `${differenceInDays} gün kaldı`
     } else {
       return `${differenceInWeeks} hafta kaldı`
     }
   }
 
-  const getAllTasks = () => {
-    dispatch(getAllTask())
-  }
-
   const handleDelete = () => {
     dispatch(deleteTask(task.id))
-    getAllTasks()
   }
   return (
     <Card
       sx={{
         maxWidth: 400,
         borderRadius: "20px",
-        margin: "15px",
+        margin: "10px",
         "@media (min-width: 800px)": {
           maxWidth: 390,
         },
@@ -76,9 +74,14 @@ export default function CardTask({
         </div>
         <div className='w-2/3'>
           <h5 className='text-base font-semibold'>{projectName}</h5>
-          <span className='text-sm font-normal '>
-            Saha Sorumlusu: {fieldManager}
-          </span>
+          <Tooltip title={fieldManager} placement='right-start'>
+            <span className='text-sm font-normal cursor-pointer'>
+              Saha Sorumlusu:{" "}
+              {fieldManager.length > 10
+                ? `${fieldManager.slice(0, 10)}...`
+                : fieldManager}
+            </span>
+          </Tooltip>
         </div>
         <button
           id='basic-button'
@@ -108,22 +111,24 @@ export default function CardTask({
       <CardContent sx={{ marginTop: "-15px" }}>
         <Typography
           variant='body2'
-          color='text.secondary'
-          sx={{ height: "70px" }}
+          color='text.primary'
+          sx={{ height: "80px" }}
         >
-          {description}
+          {description.length > 100
+            ? description.slice(0, 100) + "..."
+            : description}
         </Typography>
         <div className='w-auto flex items-center justify-between flex-wrap'>
           <span className='text-sm'>İlerleme:</span>
-          <span className='text-sm'>50%</span>
-          <ProgressBar />
+          <span className='text-sm'>{progres}%</span>
+          <ProgressBar progres={progres} />
         </div>
       </CardContent>
       <div className='flex items-center justify-between p-4'>
         <div className='h-9 w-32 flex items-center justify-center p-1 bg-slate-300 rounded-full'>
-          {task.starTime &&
+          {task.startTime &&
             task.endTime &&
-            handleDate(task.starTime, task.endTime)}
+            handleDate(task.startTime, task.endTime)}
         </div>
         <div className='flex items-center'>
           <Tooltip title='Süleyman Özdemir' arrow>
