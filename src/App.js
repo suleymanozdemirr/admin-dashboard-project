@@ -1,53 +1,49 @@
-import { Outlet, createBrowserRouter, RouterProvider } from "react-router-dom"
+import { createBrowserRouter, RouterProvider } from "react-router-dom"
 
 import Projeler from "./pages/Projeler"
-import Sidebar from "./components/sidebar/Sidebar"
-import Navbar from "./components/navbar/Navbar"
 import Dashboard from "./pages/Home"
 import SingleTask from "./pages/SingleTask"
 import Takvim from "./pages/Takvim"
+import Layout from "./layout/homeLayout"
+import Login from "./pages/SigninPage"
+import Register from "./pages/SignupPage"
 
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
+  },
+  {
+    path: "/home",
+    element: <Layout />,
+    children: [
+      {
+        path: "/home",
+        element: <Dashboard />,
+      },
+      {
+        path: "/home/projeler",
+        element: <Projeler />,
+        children: [
+          {
+            path: "/home/projeler/:id",
+            element: <SingleTask />,
+          },
+        ],
+      },
+      {
+        path: "/home/takvim",
+        element: <Takvim />,
+      },
+    ],
+  },
+])
 
 function App() {
-  const Layout = () => {
-    return (
-      <div className='flex'>
-        <Sidebar />
-        <div className='flex-1 bg-[#f7f3f8]'>
-          <Navbar />
-          <div>
-            <Outlet />
-          </div>
-        </div>
-      </div>
-    )
-  }
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Layout />,
-      children: [
-        {
-          path: "/dashboard",
-          element: <Dashboard />,
-        },
-        {
-          path: "/projeler",
-          element: <Projeler />,
-          children: [
-            {
-              path: "/projeler/:id",
-              element: <SingleTask />,
-            },
-          ],
-        },
-        {
-          path: "/takvim",
-          element: <Takvim />,
-        },
-      ],
-    },
-  ])
   return <RouterProvider router={router} />
 }
 

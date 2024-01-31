@@ -7,17 +7,17 @@ const menuItem = [
   {
     icon: <GoProjectSymlink />,
     title: "Dashboard",
-    path: "/dashboard",
+    path: "/home",
   },
   {
     icon: <GoProjectSymlink />,
     title: "Projeler",
-    path: "/projeler",
+    path: "/home/projeler",
   },
   {
     icon: <GoProjectSymlink />,
     title: "Takvim",
-    path: "/takvim",
+    path: "/home/takvim",
   },
   {
     icon: <GoProjectSymlink />,
