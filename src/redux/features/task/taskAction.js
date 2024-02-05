@@ -13,7 +13,7 @@ export const createTask = createAsyncThunk("createTask", async (formData) => {
     return isRejectedWithValue(error.response)
   }
 })
-
+ // bütün taskları getir
 export const getAllTask = createAsyncThunk("getAllTask", async () => {
   try {
     const response = await axios.get(`${POST_URL}/getall`)
@@ -24,6 +24,7 @@ export const getAllTask = createAsyncThunk("getAllTask", async () => {
   }
 })
 
+// tek bir task getir
 export const getTask = createAsyncThunk("getTask", async (id) => {
   try {
     const response = await axios.get(`${POST_URL}/get/${id}`)
@@ -34,6 +35,7 @@ export const getTask = createAsyncThunk("getTask", async (id) => {
   }
 })
 
+// task güncelle
 export const updateTask = createAsyncThunk(
   "updateTask",
   async (updatedData) => {
@@ -51,6 +53,7 @@ export const updateTask = createAsyncThunk(
   }
 )
 
+// task sil
 export const deleteTask = createAsyncThunk("deleteTask", async (id) => {
   try {
     const response = await axios.delete(`${POST_URL}/delete/${id}`)

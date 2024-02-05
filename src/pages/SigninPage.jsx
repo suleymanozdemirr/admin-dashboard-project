@@ -6,11 +6,12 @@ import Button from "@mui/material/Button"
 import IconButton from "@mui/material/IconButton"
 import { MdVisibility, MdVisibilityOff } from "react-icons/md"
 import { FcGoogle } from "react-icons/fc"
-import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { loginSchema } from "../schema/yup"
+import { useDispatch } from "react-redux"
+import { login } from "../redux/features/auth/authAction"
 import { useFormik } from "formik"
-import axios from "axios"
+import { useState } from "react"
 
 const initialValues = {
   email: "",
@@ -19,30 +20,21 @@ const initialValues = {
 
 export default function SigninPage() {
   const [show, setShow] = useState(false)
+  const dispatch = useDispatch()
   const navigate = useNavigate()
+
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: initialValues,
       validationSchema: loginSchema,
       onSubmit: (values) => {
-        axios
-          .get("http://localhost:8000/users/", {
-            params: {
-              email: values.email,
-              password: values.password,
-            },
-          })
-          .then((result) => {
-            console.log("result")
-            result.data.length > 0 && navigate("/home")
-          })
-          .catch((err) => console.error(err))
-        console.log(values)
+        dispatch(login(values))
+        navigate("/home")
       },
     })
   return (
     <Layout>
-      <div className='flex flex-col justify-center p-8 md:p-14'>
+      <div className='flex flex-col justify-center p-8 md:p-20'>
         <span className='mb-5 text-3xl font-bold'>Oturum Aç</span>
         <form onSubmit={handleSubmit}>
           <Stack spacing={3}>
@@ -57,6 +49,7 @@ export default function SigninPage() {
                 onChange={handleChange}
                 error={!!(touched.email && errors.email)}
                 helperText={touched.email && errors.email}
+                sx={{ width: "100%", maxWidth: "300px" }}
               />
 
               <TextField
@@ -69,9 +62,7 @@ export default function SigninPage() {
                 onChange={handleChange}
                 error={!!(touched.password && errors.password)}
                 helperText={touched.password && errors.password}
-                sx={{
-                  width: "40ch",
-                }}
+                sx={{ width: "100%", maxWidth: "300px" }}
                 InputProps={{
                   endAdornment: (
                     <IconButton onClick={() => setShow(!show)}>

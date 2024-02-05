@@ -9,7 +9,8 @@ import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { useFormik } from "formik"
 import { signUpSchema } from "../schema/yup"
-import axios from "axios"
+import { useDispatch } from "react-redux"
+import { register } from "../redux/features/auth/authAction"
 
 const initialValues = {
   username: "",
@@ -20,22 +21,18 @@ const initialValues = {
 
 export default function SignupPage() {
   const [show, setShow] = useState({ password: false, cpassword: false })
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: initialValues,
       validationSchema: signUpSchema,
       onSubmit: (values) => {
-        axios
-          .post("http://localhost:8000/users", values)
-          .then((result) => {
-            console.log("result")
-            navigate("/")
-          })
-          .catch((err) => console.error(err))
-        console.log(values)
+        dispatch(register(values))
+        navigate("/")
       },
     })
+  console.log(values)
 
   return (
     <Layout>
@@ -47,16 +44,14 @@ export default function SignupPage() {
               <TextField
                 type='text'
                 name='username'
-                label='Username'
+                label='Adınız Soyadınız'
                 variant='outlined'
                 value={values.username}
                 onBlur={handleBlur}
                 onChange={handleChange}
                 error={!!(touched.username && errors.username)}
                 helperText={touched.username && errors.username}
-                sx={{
-                  width: "40ch",
-                }}
+                sx={{ width: "100%", maxWidth: "300px" }}
               />
 
               <TextField
@@ -69,6 +64,7 @@ export default function SignupPage() {
                 onChange={handleChange}
                 error={!!(touched.email && errors.email)}
                 helperText={touched.email && errors.email}
+                sx={{ width: "100%", maxWidth: "300px" }}
               />
 
               <TextField
@@ -81,6 +77,7 @@ export default function SignupPage() {
                 onChange={handleChange}
                 error={!!(touched.password && errors.password)}
                 helperText={touched.password && errors.password}
+                sx={{ width: "100%", maxWidth: "300px" }}
                 InputProps={{
                   endAdornment: (
                     <IconButton
@@ -108,6 +105,7 @@ export default function SignupPage() {
                 onChange={handleChange}
                 error={!!(touched.cpassword && errors.cpassword)}
                 helperText={touched.cpassword && errors.cpassword}
+                sx={{ width: "100%", maxWidth: "300px" }}
                 InputProps={{
                   endAdornment: (
                     <IconButton
