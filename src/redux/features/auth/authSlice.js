@@ -1,12 +1,14 @@
-import { createSlice } from "@reduxjs/toolkit"
-import { login, register } from "./authAction"
+import { createSlice } from '@reduxjs/toolkit'
+import { login, register } from './authAction'
+
+const user = JSON.parse(localStorage.getItem('user'))
 
 const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState: {
-    user: null,
+    user: user ? user : null,
     loading: false,
-    error: "",
+    error: '',
   },
   extraReducers: (builder) => {
     builder.addCase(login.pending, (state) => {
@@ -14,7 +16,6 @@ const authSlice = createSlice({
     })
     builder.addCase(login.fulfilled, (state, action) => {
       state.loading = false
-      localStorage.setItem("profile", JSON.stringify({ ...action.payload }))
       state.user = action.payload
     })
     builder.addCase(login.rejected, (state, action) => {
@@ -26,7 +27,6 @@ const authSlice = createSlice({
     })
     builder.addCase(register.fulfilled, (state, action) => {
       state.loading = false
-      localStorage.setItem("profile", JSON.stringify({ ...action.payload }))
       state.user = action.payload
     })
     builder.addCase(register.rejected, (state, action) => {
