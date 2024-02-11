@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { login, register } from './authAction'
+import { googleSignIn, login, register } from './authAction'
 
 const user = JSON.parse(localStorage.getItem('user'))
 
@@ -30,6 +30,17 @@ const authSlice = createSlice({
       state.user = action.payload
     })
     builder.addCase(register.rejected, (state, action) => {
+      state.loading = false
+      state.error = action.payload
+    })
+    builder.addCase(googleSignIn.pending, (state) => {
+      state.loading = true
+    })
+    builder.addCase(googleSignIn.fulfilled, (state, action) => {
+      state.loading = false
+      state.user = action.payload
+    })
+    builder.addCase(googleSignIn.rejected, (state, action) => {
       state.loading = false
       state.error = action.payload
     })
