@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import Layout from "../layout/auth"
 import Stack from "@mui/material/Stack"
 import Typography from "@mui/material/Typography"
@@ -9,7 +10,7 @@ import { FcGoogle } from "react-icons/fc"
 import { Link, useNavigate } from "react-router-dom"
 import { loginSchema } from "../schema/yup"
 import { useDispatch } from "react-redux"
-import { login } from "../redux/features/auth/authAction"
+import { googleSignIn, login } from "../redux/features/auth/authAction"
 import { useFormik } from "formik"
 import { useState } from "react"
 import GoogleLogin from "react-google-login"
@@ -35,8 +36,14 @@ export default function SigninPage() {
     })
 
   const googleSuccess = (res) => {
-    console.log(res)
+    const email = res?.profileObj?.email
+    const name = res?.profileObj?.username
+    const token = res?.profileObj?.token
+    const googleId = res?.googleId
+    const result = { email, name, token, googleId }
+    dispatch(googleSignIn({ result }))
   }
+
   const googleFailure = (res) => {
     console.log(res)
   }
