@@ -32,10 +32,16 @@ const signIn = async (values) => {
   return response.data
 }
 
+//logout user
+const logout = async () => {
+  localStorage.removeItem("user")
+}
+
 const api = {
   signUp,
   signIn,
   googleSignIn,
+  logout,
 }
 
 export default api

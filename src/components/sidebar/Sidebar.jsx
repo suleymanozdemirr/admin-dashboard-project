@@ -44,7 +44,7 @@ const menuItem = [
 export default function Sidebar() {
   const location = useLocation()
   return (
-    <div className='w-72 md:w-64 min-h-screen border-r-2'>
+    <div className='w-64 md:w-64 min-h-screen border-r-2'>
       <div className='flex items-center justify-center -mt-7'>
         <img
           className='rounded-full object-cover'
@@ -54,7 +54,7 @@ export default function Sidebar() {
           height={200}
         />
       </div>
-      <div className='flex flex-col '>
+      <div className='flex flex-col'>
         {menuItem.map((cat, i) => (
           <div key={i}>
             <Link

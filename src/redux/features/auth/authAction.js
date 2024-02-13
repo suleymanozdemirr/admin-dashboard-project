@@ -13,7 +13,6 @@ export const login = createAsyncThunk("auth/login", async (values) => {
 })
 
 // register user
-
 export const register = createAsyncThunk("auth/register", async (values) => {
   try {
     const response = await api.signUp(values)
@@ -25,7 +24,6 @@ export const register = createAsyncThunk("auth/register", async (values) => {
 })
 
 // google register user
-
 export const googleSignIn = createAsyncThunk(
   "auth/googleSignIn",
   async (result) => {
@@ -38,3 +36,8 @@ export const googleSignIn = createAsyncThunk(
     }
   }
 )
+
+// logout user
+export const logout = createAsyncThunk("auth/logout", async () => {
+  await api.logout()
+})

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { googleSignIn, login, register } from "./authAction"
+import { googleSignIn, login, register, logout } from "./authAction"
 
-const user = JSON.parse(localStorage.getItem("user"))
+const user = JSON.parse(localStorage.getItem("profile"))
 
 const authSlice = createSlice({
   name: "auth",
@@ -9,15 +9,6 @@ const authSlice = createSlice({
     user: user ? user : null,
     loading: false,
     error: "",
-  },
-  reducer: {
-    setUser: (state, action) => {
-      state.user = action.payload
-    },
-    setLogout: (state) => {
-      localStorage.removeItem("user")
-      state.user = null
-    },
   },
   extraReducers: (builder) => {
     builder.addCase(login.pending, (state) => {
@@ -53,8 +44,10 @@ const authSlice = createSlice({
       state.loading = false
       state.error = action.payload
     })
+    builder.addCase(logout.fulfilled, (state) => {
+      state.user = null
+    })
   },
 })
 
-export const { setUser, setLogout } = authSlice.actions
 export default authSlice.reducer
