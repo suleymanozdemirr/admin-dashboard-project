@@ -5,6 +5,7 @@ import {
   getTask,
   getAllTask,
   updateTask,
+  getUserTask,
 } from "./taskAction"
 
 const taskSlice = createSlice({
@@ -12,6 +13,7 @@ const taskSlice = createSlice({
   initialState: {
     task: {},
     tasks: [],
+    userTasks: [],
     loading: false,
     error: "",
   },
@@ -71,6 +73,17 @@ const taskSlice = createSlice({
       )
     })
     builder.addCase(updateTask.rejected, (state, action) => {
+      state.loading = false
+      state.error = action.payload
+    })
+    builder.addCase(getUserTask.pending, (state, action) => {
+      state.loading = true
+    })
+    builder.addCase(getUserTask.fulfilled, (state, action) => {
+      state.loading = false
+      state.userTasks = action.payload
+    })
+    builder.addCase(getUserTask.rejected, (state, action) => {
       state.loading = false
       state.error = action.payload
     })

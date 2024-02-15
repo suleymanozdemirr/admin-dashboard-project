@@ -18,5 +18,13 @@
       "starTime": "2024-01-29T14:03:33.640Z",
       "endTime": "2024-01-29T14:03:33.640Z"
     }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "suleyman",
+      "email": "suleyman@gmail.com",
+      "password": "123147asd"
+    }
   ]
 }
