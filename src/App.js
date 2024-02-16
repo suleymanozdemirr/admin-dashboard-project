@@ -7,6 +7,7 @@ import Takvim from "./pages/Takvim"
 import Layout from "./layout/homeLayout"
 import Login from "./pages/SigninPage"
 import Register from "./pages/SignupPage"
+import Kanban from "./pages/Kanban"
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: "/home/takvim",
         element: <Takvim />,
+      },
+      {
+        path: "/home/kanban",
+        element: <Kanban />,
       },
     ],
   },

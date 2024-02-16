@@ -1,27 +1,27 @@
-import React, { useState } from 'react'
-import FullCalendar from '@fullcalendar/react'
-import dayGridPlugin from '@fullcalendar/daygrid'
-import timeGridPlugin from '@fullcalendar/timegrid'
-import interactionPlugin from '@fullcalendar/interaction'
-import allLocales from '@fullcalendar/core/locales-all'
-import Stack from '@mui/material/Stack'
-import TextField from '@mui/material/TextField'
-import Dialog from '@mui/material/Dialog'
-import DialogContent from '@mui/material/DialogContent'
+import React, { useState } from "react"
+import FullCalendar from "@fullcalendar/react"
+import dayGridPlugin from "@fullcalendar/daygrid"
+import timeGridPlugin from "@fullcalendar/timegrid"
+import interactionPlugin from "@fullcalendar/interaction"
+import allLocales from "@fullcalendar/core/locales-all"
+import Stack from "@mui/material/Stack"
+import TextField from "@mui/material/TextField"
+import Dialog from "@mui/material/Dialog"
+import DialogContent from "@mui/material/DialogContent"
 
 const events = [
   {
     id: 1,
-    title: 'All Day Event',
+    title: "All Day Event",
     allDay: true,
-    start: '2024-01-26T12:07',
-    end: '2024-01-26T12:07',
+    start: "2024-01-26T12:07",
+    end: "2024-01-26T12:07",
   },
 ]
 
 export default function Takvim() {
   const [newEvents, setNewEvents] = useState({
-    title: '',
+    title: "",
     start: new Date().toISOString().slice(0, 16),
     end: new Date().toISOString().slice(0, 16),
   })
@@ -32,7 +32,7 @@ export default function Takvim() {
     e.preventDefault()
     setAllEvents([...allEvents, newEvents])
     setNewEvents({
-      title: '',
+      title: "",
       start: new Date().toISOString().slice(0, 16),
       end: new Date().toISOString().slice(0, 16),
     })
@@ -51,7 +51,7 @@ export default function Takvim() {
   }
 
   const handleEventClick = (info) => {
-    if (window.confirm('Etkinliği silmek istediğinizden emin misiniz?')) {
+    if (window.confirm("Etkinliği silmek istediğinizden emin misiniz?")) {
       deleteEvent(info.event.id)
     }
   }
@@ -64,40 +64,40 @@ export default function Takvim() {
     setOpen(false)
   }
   return (
-    <div className="min-h-screen p-12 text-sm mt-2">
+    <div className='min-h-screen p-12 text-sm mt-2'>
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         headerToolbar={{
-          left: 'prev,next today',
-          center: 'title',
-          right: 'dayGridMonth,timeGridWeek,timeGridDay',
+          left: "prev,next today",
+          center: "title",
+          right: "dayGridMonth,timeGridWeek,timeGridDay",
         }}
         events={allEvents}
         eventClick={handleEventClick}
         selectMirror={true}
-        initialView="dayGridMonth"
+        initialView='dayGridMonth'
         selectable={true}
         editable={true}
         droppable={true}
         weekends={true}
         locales={allLocales}
         firstDay={1}
-        locale={'tr'}
+        locale={"tr"}
         buttonText={{
-          day: 'Gün',
-          prev: 'Önceki',
-          next: 'Sonraki',
-          today: 'Bugün',
-          month: 'Ay',
-          week: 'Hafta',
-          nextYear: 'Sonraki Yıl',
-          prevYear: 'Önceki Yıl',
+          day: "Gün",
+          prev: "Önceki",
+          next: "Sonraki",
+          today: "Bugün",
+          month: "Ay",
+          week: "Hafta",
+          nextYear: "Sonraki Yıl",
+          prevYear: "Önceki Yıl",
         }}
       />
-      <div className="absolute top-[84px]">
+      <div className='absolute top-[84px]'>
         <button
-          className="px-6 py-2 bg-blue-500 text-slate-50 rounded-lg hover:bg-blue-400 cursor-pointer"
-          type="button"
+          className='px-6 py-2 bg-blue-500 text-slate-50 rounded-lg hover:bg-blue-400 cursor-pointer'
+          type='button'
           onClick={handleClickOpen}
         >
           Taslak Ekle
@@ -107,41 +107,41 @@ export default function Takvim() {
             <form onSubmit={handleSubmit}>
               <Stack
                 sx={{
-                  width: '470px',
+                  width: "470px",
                 }}
                 spacing={2}
-                direction="column"
+                direction='column'
               >
                 <TextField
-                  name="title"
-                  variant="outlined"
-                  label="Konu"
+                  name='title'
+                  variant='outlined'
+                  label='Konu'
                   value={newEvents.title}
                   onChange={handleInputChange}
                 />
-                <div className="flex items-center justify-between">
+                <div className='flex items-center justify-between'>
                   <TextField
-                    name="start"
-                    label="Start Date"
+                    name='start'
+                    label='Start Date'
                     value={newEvents.start}
                     onChange={handleInputChange}
-                    type="datetime-local"
-                    InputProps={{ style: { borderRadius: '10px' } }}
+                    type='datetime-local'
+                    InputProps={{ style: { borderRadius: "10px" } }}
                     InputLabelProps={{ shrink: true }}
                   />
                   <TextField
-                    name="end"
-                    label="End Date"
+                    name='end'
+                    label='End Date'
                     value={newEvents.end}
                     onChange={handleInputChange}
-                    type="datetime-local"
-                    InputProps={{ style: { borderRadius: '10px' } }}
+                    type='datetime-local'
+                    InputProps={{ style: { borderRadius: "10px" } }}
                     InputLabelProps={{ shrink: true }}
                   />
                 </div>
                 <button
-                  className="py-2 bg-blue-600 text-slate-50 rounded-lg hover:bg-blue-500 cursor-pointer"
-                  type="submit"
+                  className='py-2 bg-blue-600 text-slate-50 rounded-lg hover:bg-blue-500 cursor-pointer'
+                  type='submit'
                   onClick={handleClose}
                 >
                   Ekle

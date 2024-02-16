@@ -6,7 +6,7 @@ const API_URL = "http://localhost:5000/users"
 // login user
 export const login = createAsyncThunk("auth/login", async (values) => {
   try {
-    const response = await axios.post(`${API_URL}/login`, values)
+    const response = await axios.get(`${API_URL}/login`, values)
     if (response.data) {
       localStorage.setItem("user", JSON.stringify(response.data))
     }

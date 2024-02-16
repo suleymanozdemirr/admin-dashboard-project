@@ -102,8 +102,9 @@ export default function Navbar() {
                 fontWeight: "400",
                 marginBottom: "5px",
                 "&:hover": {
-                  color: "#3BC1C1",
-                  bgcolor: "white",
+                  bgcolor: "#EEF5FF",
+                  borderColor: "rgb(37 99 235)",
+                  color: "rgb(37 99 235)",
                 },
               }}
             >
@@ -118,7 +119,11 @@ export default function Navbar() {
                 gap: "10px",
                 fontSize: "15px",
                 fontWeight: "400",
-                "&:hover": { color: "#3BC1C1", bgcolor: "white" },
+                "&:hover": {
+                  bgcolor: "#EEF5FF",
+                  borderColor: "rgb(37 99 235)",
+                  color: "rgb(37 99 235)",
+                },
               }}
             >
               <MdLogout size={18} />

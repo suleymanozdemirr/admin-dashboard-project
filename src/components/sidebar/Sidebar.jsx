@@ -21,8 +21,8 @@ const menuItem = [
   },
   {
     icon: <GoProjectSymlink />,
-    title: "Satın Alma",
-    path: "#",
+    title: "Kanban",
+    path: "/home/kanban",
   },
   {
     icon: <GoProjectSymlink />,

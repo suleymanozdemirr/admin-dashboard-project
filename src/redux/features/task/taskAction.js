@@ -1,7 +1,7 @@
 import { createAsyncThunk, isRejectedWithValue } from "@reduxjs/toolkit"
 import axios from "axios"
 
-const POST_URL = "http://localhost:5000/posts"
+const POST_URL = "http://localhost:5000/project"
 
 // create User
 export const createTask = createAsyncThunk("createTask", async (formData) => {
