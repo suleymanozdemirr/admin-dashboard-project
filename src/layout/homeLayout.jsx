@@ -9,9 +9,7 @@ export default function homeLayout() {
       <Sidebar />
       <div className='flex-1 bg-[#f7f3f8]'>
         <Navbar />
-        <div>
-          <Outlet />
-        </div>
+        <Outlet />
       </div>
     </div>
   )

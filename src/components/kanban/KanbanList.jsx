@@ -1,13 +1,29 @@
-import React from "react"
-import KanbanCard from "./KanbanCard"
-import AddNew from "./AddNew"
-
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd"
+import mockData from "../../mockData"
+import { useState } from "react"
 export default function KanbanList() {
+  const [data, setData] = useState(mockData)
+
+  const onDragEnd = (result) => {
+    console.log(result)
+  }
   return (
-    <div className='p-3 bg-white w-1/3'>
-      <div>To Do</div>
-      <KanbanCard />
-      <AddNew />
-    </div>
+    <DragDropContext onDragEnd={onDragEnd}>
+      <div className='kanban'>
+        {data.map((section) => (
+          <Droppable key={section.id} droppableId={section.id}>
+            {(provided) => (
+              <div
+                {...provided.droppableProps}
+                className='kanban_section'
+                ref={provided.innerRef}
+              >
+                <div className='kanban_section_title'>{section.title}</div>
+              </div>
+            )}
+          </Droppable>
+        ))}
+      </div>
+    </DragDropContext>
   )
 }
