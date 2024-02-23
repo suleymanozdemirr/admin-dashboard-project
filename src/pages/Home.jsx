@@ -1,5 +1,10 @@
 import React from "react"
+import Wrapper from "../components/dashboard/Wrapper"
 
 export default function Home() {
-  return <div>Home</div>
+  return (
+    <div>
+      <Wrapper />
+    </div>
+  )
 }

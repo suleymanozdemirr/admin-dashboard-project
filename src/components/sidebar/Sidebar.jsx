@@ -1,7 +1,7 @@
 import { GoProjectSymlink } from "react-icons/go"
 import { Link } from "react-router-dom"
 import { useLocation } from "react-router-dom"
-import logo from "../../assets/logo.png"
+import logo from "../../assets/png-transparent-white-arrow-going-up-computer-icons-dashboard-car-symbol-dashboard-icon-miscellaneous-angle-logo.png"
 
 const menuItem = [
   {
@@ -26,17 +26,7 @@ const menuItem = [
   },
   {
     icon: <GoProjectSymlink />,
-    title: "Envanter",
-    path: "#",
-  },
-  {
-    icon: <GoProjectSymlink />,
-    title: "Muhasebe",
-    path: "#",
-  },
-  {
-    icon: <GoProjectSymlink />,
-    title: "Kurumsal Hafıza",
+    title: "Kullanıcı İşlemleri",
     path: "#",
   },
 ]
@@ -44,15 +34,16 @@ const menuItem = [
 export default function Sidebar() {
   const location = useLocation()
   return (
-    <div className='w-64 md:w-64 min-h-screen border-r-2'>
-      <div className='flex items-center justify-center -mt-7'>
+    <div className='w-64 min-h-screen border-r-2'>
+      <div className='flex items-center justify-flex mt-6 mb-4 ml-5 cursor-pointer max-lg:w-56'>
         <img
           className='rounded-full object-cover'
           src={logo}
-          alt=''
-          width={200}
-          height={200}
+          alt='logo'
+          width={50}
+          height={50}
         />
+        <span className='text-lg font-bold ml-2 text-blue-900'>FAWDASH</span>
       </div>
       <div className='flex flex-col'>
         {menuItem.map((cat, i) => (
