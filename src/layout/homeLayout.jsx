@@ -5,11 +5,13 @@ import Sidebar from "../components/sidebar/Sidebar"
 
 export default function homeLayout() {
   return (
-    <div className='flex'>
+    <div className=' flex basis-[12%]'>
       <Sidebar />
-      <div className='flex-1 bg-[#f7f3f8]'>
+      <div className='bg-[#f7f3f8] basis-[88%]'>
         <Navbar />
-        <Outlet />
+        <div>
+          <Outlet />
+        </div>
       </div>
     </div>
   )

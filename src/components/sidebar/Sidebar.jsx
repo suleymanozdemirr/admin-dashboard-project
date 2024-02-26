@@ -34,7 +34,7 @@ const menuItem = [
 export default function Sidebar() {
   const location = useLocation()
   return (
-    <div className='w-64 min-h-screen border-r-2'>
+    <div className='w-64 min-h-screen border-r-2 '>
       <div className='flex items-center justify-flex mt-6 mb-4 ml-5 cursor-pointer max-lg:w-56'>
         <img
           className='rounded-full object-cover'
