@@ -8,6 +8,7 @@ import Layout from "./layout/homeLayout"
 import Login from "./pages/SigninPage"
 import Register from "./pages/SignupPage"
 import Kanban from "./pages/Kanban"
+import Profile from "./pages/Profile"
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,9 @@ const router = createBrowserRouter([
       {
         path: "/home/kanban",
         element: <Kanban />,
+      },{
+        path: "/home/profile",
+        element: <Profile />,
       },
     ],
   },

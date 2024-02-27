@@ -27,7 +27,7 @@ const menuItem = [
   {
     icon: <GoProjectSymlink />,
     title: "Kullanıcı İşlemleri",
-    path: "#",
+    path: "/home/profile",
   },
 ]
 

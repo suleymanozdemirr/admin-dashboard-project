@@ -17,32 +17,23 @@
       "fieldManager": "",
       "starTime": "2024-01-29T14:03:33.640Z",
       "endTime": "2024-01-29T14:03:33.640Z"
+    },
+    {
+      "id": "ee87",
+      "projectName": "dsadasd",
+      "avatar": "",
+      "description": "sadsadasdsa",
+      "fieldManager": "sadasdas",
+      "startTime": "2024-02-27T09:56:29.334Z",
+      "endTime": "2024-02-27T09:56:29.334Z"
     }
   ],
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "username": "suleyman",
       "email": "suleyman@gmail.com",
       "password": "123147asd"
     }
-  ],
-  "columns": [
-    {
-      "id": "list-1",
-      "title": "To do",
-      "cards": [{ "id": 1, "title": "vim practice" }]
-    },
-    {
-      "id": "list-2",
-      "title": "In progress",
-      "cards": [{ "id": 2, "title": "react practice" }]
-    },
-    {
-      "id": "list-3",
-      "title": "Done",
-      "cards": [{ "id": 3, "title": "nodejs practice" }]
-    }
-  ],
-  "listIds": ["list-1", "list-2", "list-3"]
+  ]
 }

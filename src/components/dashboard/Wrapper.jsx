@@ -34,10 +34,9 @@ const salesData = [
 export default function Wrapper() {
   return (
     <div className='grid grid-cols-4 gap-[30px] mt-[25px] pb-[15px]'>
-      {salesData.map((item, index) => (
+      {salesData.map((item) => (
         <div
-          key={index}
-          className={`h-24 rounded-lg bg-white border-l-4 border-[${item.color}] flex items-center justify-between px-[30px] cursor-pointer hover:shadow-lg transform hover:scale-[103%] transition duration-300 ease-out`}
+          className={`h-24 rounded-lg bg-white border-l-4 bg-[${item.color}] flex items-center justify-between px-[30px] cursor-pointer hover:shadow-lg transform hover:scale-[103%] transition duration-300 ease-out`}
         >
           <div>
             <h2 className='text-base leading-7 font-normal'>{item.title}</h2>

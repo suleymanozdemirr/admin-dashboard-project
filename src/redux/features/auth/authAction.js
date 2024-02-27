@@ -1,7 +1,7 @@
 import { createAsyncThunk, isRejectedWithValue } from "@reduxjs/toolkit"
 import axios from "axios"
 
-const API_URL = "http://localhost:5000/users"
+const API_URL = "http://localhost:5000"
 
 // login user
 export const login = createAsyncThunk("auth/login", async (values) => {

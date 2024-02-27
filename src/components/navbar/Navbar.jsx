@@ -28,6 +28,7 @@ export default function Navbar() {
     setAnchorEl(event.currentTarget)
   }
   const handleClose = () => {
+    navigate("/home/profile")
     setAnchorEl(null)
   }
   const location = useLocation()
