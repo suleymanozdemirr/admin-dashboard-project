@@ -1,7 +1,9 @@
-import React from 'react'
+import List from "../components/profile/List"
 
 export default function Profile() {
   return (
-    <div>Profile</div>
+    <div className='p-3'>
+      <List />
+    </div>
   )
 }
